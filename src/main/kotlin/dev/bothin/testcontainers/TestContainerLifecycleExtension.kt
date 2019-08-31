@@ -17,6 +17,7 @@ class TestContainerLifecycleExtension : BeforeAllCallback, ExtensionContext.Stor
         val testClass = context.testClass.get()
         val testContainerConfiguration =
             testClass.getAnnotation(TestContainerConfigurationClass::class.java)?.value
+                ?: testClass.superclass.getAnnotation(TestContainerConfigurationClass::class.java)?.value
         checkNotNull(testContainerConfiguration)
         val qualifiedName = testContainerConfiguration.qualifiedName
         checkNotNull(qualifiedName)
@@ -30,7 +31,9 @@ class TestContainerLifecycleExtension : BeforeAllCallback, ExtensionContext.Stor
             instance.startAll()
             instance.afterStart()
 
-            instances[testContainerConfiguration.qualifiedName!!] = instance
+            instances[qualifiedName] = instance
+        } else {
+            instances[qualifiedName]?.afterStart()
         }
     }
 

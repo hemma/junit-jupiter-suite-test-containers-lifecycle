@@ -6,7 +6,7 @@ plugins {
 apply plugin: 'maven-publish'
 
 group 'dev.bothin.testcontainers'
-version '0.0.1-SNAPSHOT'
+version '0.0.2'
 
 repositories {
     mavenCentral()
@@ -45,7 +45,7 @@ publishing {
             }
             groupId 'dev.bothin.testcontainers'
             artifactId 'junit-jupiter-suite-test-containers-lifecycle'
-            version '0.0.1'
+            version '0.0.2'
         }
     }
 }
@@ -63,9 +63,9 @@ bintray {
         labels = ['test-containers', 'junit-jupiter', 'kotlin', 'java']
         publicDownloadNumbers = true
         version {
-            name = '0.0.1'
+            name = '0.0.2'
             desc = ''
-            vcsTag = '0.0.1'
+            vcsTag = '0.0.2'
         }
     }
 }

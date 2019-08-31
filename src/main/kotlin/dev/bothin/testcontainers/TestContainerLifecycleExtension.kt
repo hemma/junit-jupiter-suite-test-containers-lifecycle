@@ -26,7 +26,8 @@ class TestContainerLifecycleExtension : BeforeAllCallback, ExtensionContext.Stor
         if (globalStore.get(storeCode) == null) {
             globalStore.put(storeCode, this)
             val instance =
-                testContainerConfiguration.primaryConstructor?.call() ?: testContainerConfiguration.java.newInstance()
+                testContainerConfiguration.primaryConstructor?.call()
+                    ?: testContainerConfiguration.java.getDeclaredConstructor().newInstance()
 
             instance.startAll()
             instance.afterStart()
